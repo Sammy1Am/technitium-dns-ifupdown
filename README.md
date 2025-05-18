@@ -5,7 +5,7 @@ Essentially I wanted to run Technitium DNS in an Incus LXC container. This worke
 a) accessible via a static IP<br/>
 b) have IPv6 connectivity to the Internet
 
-I wanted to connect Technicium using a macvlan network.  *However*, the default image doesn't contain any sort of network configuration infrastructue because generally Docker provides this via its own DHCP services.  This wrapper:
+I needed to connect Technicium using a macvlan network.  *However*, the default image doesn't contain any sort of network configuration infrastructue because generally Docker provides this via its own DHCP services, so the macvlan networks would not fully initialize.  This wrapper:
 
 - Adds the ifupdown package
 - Replaces the Technicium entrypoint with a script that first calls `ifup -a` and *then* calls the default Technitium entry point.
